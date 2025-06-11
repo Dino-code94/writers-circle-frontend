@@ -19,12 +19,16 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="container mt-5">
       <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="username" placeholder="Username" onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-        <button type="submit">Register</button>
+      <form onSubmit={handleSubmit} className="w-50 mx-auto">
+        <div className="mb-3">
+          <input name="username" className="form-control" placeholder="Username" onChange={handleChange} required />
+        </div>
+        <div className="mb-3">
+          <input name="password" type="password" className="form-control" placeholder="Password" onChange={handleChange} required />
+        </div>
+        <button type="submit" className="btn btn-primary w-100">Register</button>
       </form>
     </div>
   );

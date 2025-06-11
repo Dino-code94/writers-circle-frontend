@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
 import API from '../services/api';
 
-// Login component for user authentication
 function Login() {
-  // Form state: username & password
   const [formData, setFormData] = useState({ username: '', password: '' });
 
-  // Handle input field changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Call backend API to log in
       const res = await API.post('login/', formData);
-      // Save received token to localStorage
       localStorage.setItem('token', res.data.token);
       alert('Logged in successfully!');
     } catch (err) {
@@ -26,12 +20,16 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="container mt-5">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="username" placeholder="Username" onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-        <button type="submit">Login</button>
+      <form onSubmit={handleSubmit} className="w-50 mx-auto">
+        <div className="mb-3">
+          <input name="username" className="form-control" placeholder="Username" onChange={handleChange} required />
+        </div>
+        <div className="mb-3">
+          <input name="password" type="password" className="form-control" placeholder="Password" onChange={handleChange} required />
+        </div>
+        <button type="submit" className="btn btn-success w-100">Login</button>
       </form>
     </div>
   );
