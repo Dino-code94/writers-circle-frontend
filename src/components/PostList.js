@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import API from '../services/api';
+import VoteUpDown from './VoteUpDown';
+import Comments from './Comments';
 
-// PostList component to fetch & display posts
+// PostList component: display all posts with voting & comments
 function PostList() {
   const [posts, setPosts] = useState([]);
 
-  // Fetch posts on component load
-  useEffect(() => {
+  // Fetch posts
+  const fetchPosts = () => {
     API.get('posts/')
       .then((res) => setPosts(res.data))
       .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    fetchPosts();
   }, []);
 
   return (
@@ -20,7 +26,8 @@ function PostList() {
           <h3>{post.title}</h3>
           <p>{post.content}</p>
           <p>Author: {post.author.username}</p>
-          <p>Votes: {post.votes}</p>
+          <VoteUpDown postId={post.id} currentVotes={post.votes} refreshPosts={fetchPosts} />
+          <Comments postId={post.id} />
         </div>
       ))}
     </div>
