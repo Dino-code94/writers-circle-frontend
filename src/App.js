@@ -9,8 +9,9 @@ import PostList from './components/PostList';
 import CreatePost from './components/CreatePost';
 import PostDetail from './components/PostDetail';
 
-// Import Admin Dashboard
+// Import Admin components
 import AdminDashboard from './components/AdminDashboard';
+import AdminProtectedRoute from './components/AdminProtectedRoute';  // Protection wrapper
 
 function App() {
   return (
@@ -24,8 +25,12 @@ function App() {
         <Route path="/create" element={<CreatePost />} />        {/* Create new post */}
         <Route path="/post/:id" element={<PostDetail />} />      {/* View post details */}
 
-        {/* Admin Route */}
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />  {/* Admin Dashboard */}
+        {/* Admin Route - now protected */}
+        <Route path="/admin-dashboard" element={
+          <AdminProtectedRoute>
+            <AdminDashboard />
+          </AdminProtectedRoute>
+        } />
       </Routes>
     </BrowserRouter>
   );
