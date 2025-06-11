@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import API from '../services/api';
 
-// Comments component: list and add comments for a post
+// Comments component: list and submit comments for post
 function Comments({ postId }) {
   const [comments, setComments] = useState([]);
   const [content, setContent] = useState('');
 
-  // Fetch comments when component loads
+  // Load comments from backend
   useEffect(() => {
     API.get('comments/', { params: { post: postId } })
       .then(res => setComments(res.data))
       .catch(err => console.error(err));
   }, [postId]);
 
-  // Handle comment submission
+  // Handle comment form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -27,20 +27,24 @@ function Comments({ postId }) {
   };
 
   return (
-    <div>
+    <div className="mt-3">
       <h4>Comments</h4>
-      <form onSubmit={handleSubmit}>
+
+      {/* Comment submission form */}
+      <form onSubmit={handleSubmit} className="mb-3">
         <textarea
+          className="form-control mb-2"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Add a comment"
           required
         />
-        <button type="submit">Submit</button>
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
 
+      {/* Render all comments */}
       {comments.map((comment) => (
-        <div key={comment.id} style={{ margin: '10px 0' }}>
+        <div key={comment.id} className="mb-2 p-2 border rounded">
           <strong>{comment.author.username}:</strong> {comment.content}
         </div>
       ))}
