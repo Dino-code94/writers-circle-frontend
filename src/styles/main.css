@@ -23,3 +23,9 @@ body {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
+/* === Buttons global look === */
+button, .btn {
+  border-radius: 6px !important;
+  padding: 8px 20px;
+}
