@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../services/api';
 import Comments from './Comments';
@@ -9,17 +9,17 @@ function PostDetail() {
   const { id } = useParams();  // extract post ID from URL params
   const [post, setPost] = useState(null);  // state to hold post data
 
-  // Fetch the post from backend API
-  const fetchPost = () => {
+  // Fetch the post from backend API (wrapped in useCallback for ESLint stability)
+  const fetchPost = useCallback(() => {
     API.get(`posts/${id}/`)
       .then(res => setPost(res.data))
       .catch(err => console.error(err));
-  };
+  }, [id]);
 
   // Fetch post data when component mounts or ID changes
   useEffect(() => {
     fetchPost();
-  }, [id]);
+  }, [fetchPost]);
 
   // Show loading while fetching
   if (!post) return <div>Loading...</div>;
