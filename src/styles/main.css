@@ -1,0 +1,25 @@
+/* === Global resets === */
+body {
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* === Navbar === */
+.navbar {
+  background-color: #343a40 !important;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #fff !important;
+}
+
+/* === Container global spacing === */
+.container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
