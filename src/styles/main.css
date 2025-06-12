@@ -52,3 +52,23 @@ button, .btn {
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* === Responsive media queries === */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  form {
+    padding: 0 10px;
+  }
+
+  .admin-table th, .admin-table td {
+    padding: 8px 10px;
+  }
+
+  button, .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
