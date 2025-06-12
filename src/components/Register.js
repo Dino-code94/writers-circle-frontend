@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import API from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 // Register component: handles user registration
 function Register() {
-  const [formData, setFormData] = useState({ username: '', password: '' }); // form state
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ username: '', password: '' });
 
   // Handle input field changes
   const handleChange = (e) => {
@@ -14,9 +16,9 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send registration request to backend
       await API.post('register/', formData);
       alert('Registered successfully!');
+      navigate('/login'); // Redirect to login after successful registration
     } catch (err) {
       alert('Registration failed');
     }
@@ -24,12 +26,10 @@ function Register() {
 
   return (
     <div className="container mt-5">
-      <h2>Register</h2>
+      <h2>Register to Writer's Circle</h2>
+      <p>Join our global writing community. Share stories, articles, tutorials and more.</p>
 
-      {/* Bootstrap-styled form */}
       <form onSubmit={handleSubmit} className="w-50 mx-auto">
-
-        {/* Username input */}
         <div className="mb-3">
           <input
             name="username"
@@ -40,7 +40,6 @@ function Register() {
           />
         </div>
 
-        {/* Password input */}
         <div className="mb-3">
           <input
             name="password"
@@ -52,7 +51,6 @@ function Register() {
           />
         </div>
 
-        {/* Submit button */}
         <button type="submit" className="btn btn-primary w-100">
           Register
         </button>

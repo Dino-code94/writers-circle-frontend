@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import API from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
-// Login component: handles user authentication
+// Login component: handles user login & token storage
 function Login() {
-  const [formData, setFormData] = useState({ username: '', password: '' }); // form state
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ username: '', password: '' });
 
   // Handle input field changes
   const handleChange = (e) => {
@@ -14,11 +16,10 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send login request to backend
       const res = await API.post('login/', formData);
-      // Store the received token in localStorage
       localStorage.setItem('token', res.data.token);
-      alert('Logged in successfully!');
+      alert('Login successful!');
+      navigate('/');  // Redirect to homepage after login
     } catch (err) {
       alert('Login failed');
     }
@@ -26,12 +27,10 @@ function Login() {
 
   return (
     <div className="container mt-5">
-      <h2>Login</h2>
+      <h2>Welcome back to Writer's Circle</h2>
+      <p>Login to explore and contribute to community discussions, stories and knowledge sharing.</p>
 
-      {/* Bootstrap-styled form */}
       <form onSubmit={handleSubmit} className="w-50 mx-auto">
-
-        {/* Username input */}
         <div className="mb-3">
           <input
             name="username"
@@ -42,7 +41,6 @@ function Login() {
           />
         </div>
 
-        {/* Password input */}
         <div className="mb-3">
           <input
             name="password"
@@ -54,8 +52,7 @@ function Login() {
           />
         </div>
 
-        {/* Submit button */}
-        <button type="submit" className="btn btn-success w-100">
+        <button type="submit" className="btn btn-primary w-100">
           Login
         </button>
       </form>

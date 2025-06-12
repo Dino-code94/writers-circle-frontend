@@ -32,6 +32,10 @@ function App() {
           </AdminProtectedRoute>
         } />
       </Routes>
+      <footer className="text-center py-3 text-muted">
+  &copy; {new Date().getFullYear()} Writer's Circle. All rights reserved.
+</footer>
+
     </BrowserRouter>
   );
 }

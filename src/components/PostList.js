@@ -18,7 +18,8 @@ function PostList() {
       <p className="mb-5 fs-5">
         A global publishing platform where you can share articles, tutorials, 
         creative writing, and journalistic stories. 
-        Register or login to contribute and engage with the community!
+        Register or login to contribute and engage with the community!<br />
+        Start writing, sharing, and connecting with writers worldwide!
       </p>
 
       {posts.map(post => (
