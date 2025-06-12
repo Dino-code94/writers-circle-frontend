@@ -29,3 +29,26 @@ button, .btn {
   border-radius: 6px !important;
   padding: 8px 20px;
 }
+
+/* === Admin Dashboard Table === */
+.admin-table {
+  margin-top: 2rem;
+}
+
+.admin-table th, .admin-table td {
+  padding: 12px 18px;
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: #f1f1f1;
+}
+
+.admin-delete-button {
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
