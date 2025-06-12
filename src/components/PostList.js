@@ -1,58 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../services/api';
-import VoteUpDown from './VoteUpDown';
-import Comments from './Comments';
 
-// PostList component: fetch and display all posts
+// Displays list of posts on homepage
 function PostList() {
-  const [posts, setPosts] = useState([]); // post list state
+  const [posts, setPosts] = useState([]);
 
-  // Fetch posts from backend
-  const fetchPosts = () => {
-    API.get('posts/')
-      .then((res) => setPosts(res.data))
-      .catch((err) => console.error(err));
-  };
-
-  // Load posts when component mounts
   useEffect(() => {
-    fetchPosts();
+    API.get('posts/')
+      .then(res => setPosts(res.data))
+      .catch(err => console.error(err));
   }, []);
 
   return (
     <div className="container mt-5">
-      <h2>Posts</h2>
+      <h1 className="mb-4">Welcome to Writer's Circle</h1>
+      <p className="mb-5 fs-5">
+        A global publishing platform where you can share articles, tutorials, 
+        creative writing, and journalistic stories. 
+        Register or login to contribute and engage with the community!
+      </p>
 
-      {/* Bootstrap grid layout */}
-      <div className="row">
-        {posts.map((post) => (
-          <div key={post.id} className="col-md-6 mb-4">
-            <div className="card shadow-sm">
-              <div className="card-body">
-                {/* Post title with link to PostDetail */}
-                <h4 className="card-title">
-                  <Link to={`/post/${post.id}`}>{post.title}</Link>
-                </h4>
-
-                {/* Post content */}
-                <p className="card-text">{post.content}</p>
-
-                {/* Author info */}
-                <p className="card-text">
-                  <small className="text-muted">Author: {post.author.username}</small>
-                </p>
-
-                {/* Voting component */}
-                <VoteUpDown postId={post.id} currentVotes={post.votes} refreshPosts={fetchPosts} />
-
-                {/* Comments component */}
-                <Comments postId={post.id} />
-              </div>
-            </div>
+      {posts.map(post => (
+        <div key={post.id} className="card shadow-sm mb-3">
+          <div className="card-body">
+            <h3 className="card-title">{post.title}</h3>
+            <p className="card-text">{post.content.substring(0, 150)}...</p>
+            <p className="text-muted">Author: {post.author.username}</p>
+            <Link to={`/post/${post.id}`} className="btn btn-primary">Read More</Link>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
